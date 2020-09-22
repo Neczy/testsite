@@ -22,7 +22,8 @@ class News(models.Model):
     
 
 class Category(models.Model):
-    title = models.CharField(max_length=150, db_index=True, verbose_name = 'Имя')
+    title = models.CharField(max_length=150, db_index=True, verbose_name = 'Имя', default="Неотсортированное")
+    
 
     class Meta:
         verbose_name = 'Категория'
