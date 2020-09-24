@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>{{ title }}</title>
+    <title>{{ category.title }}</title>
   </head>
   <body>
 
@@ -18,55 +18,59 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a>
       <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Add news</a>
       </li>
     </ul>
   </div>
 </nav>
 
-<div class="containernt mt-3">
-    <h2>{{title}}</h2>
+<div class="containernt mt-7">
     <div class="row">
 
       <div class="col-md-3">
         <div class="list-group">
           {% for item in categories %}
-          <div class="list-group">
+            <div class="list-group">
             <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action active">
               {{ item.title }}
             </a>
+            </div>
+        </div>
           {% endfor %}
         </div>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-8">
         {% for item in news %}
-            <div class="card mb-5">
+            <div class="card mb-8">
                 <h5 class="card-header">
                 Категория: <a href="{% url 'category' item.category.pk %}"> {{ item.category }}</a> </h5>
                 <div class="card-body">
                   <div class="media">
-                  {% if item.photo%}
-                    <img src="{{ item.photo.url }}" alt-"" class="mr-3">
-                  {% endif %}
+                    {% if item.photo%}
+                      <img src="{{ item.photo.url }}" alt-"" class="mr-10">
+                    {% endif %}
                     <div class="media-body">
+                    
                     <h5 class="card-title"> {{ item.title}}</h5>
+                    
                     <p class="card-text"> {{ item.content }}</p>
                     <hr>
                     <a href="#" class="btn btn-primary"> Read more </a>
-                    <div class="card-footer text-muted"> {{ item.created_at|date:"Y-m-d H:i" }}
-                    </div>
+                      <div class="card-footer text-muted"> {{ item.created_at|date:"Y-m-d H:i" }}
+                      </div>
                     </div>
                   </div>
-                
-                </div>
+              </div>
         {% empty %}
 
           <li> Извините, произошла внутренняя ошибка </li>
         
         {% endfor %}
-    </div>
+      </div>
+  </div>
 </div>
 
 
